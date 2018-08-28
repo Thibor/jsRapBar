@@ -1,2 +1,2 @@
 # rapBar
-jQuery clickable progress bar plugin
+Jquery clickable progress bar plugin

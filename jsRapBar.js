@@ -30,8 +30,11 @@ return this.each(function(){
 			},
 			mousedown:function(e){
 				button = 1;
+				e = e || window.event;
+				e.stopPropagation();
 				e.preventDefault();
-				e.target.setCapture();
+				if(this.setCapture)
+					this.setCapture();
 			},
 			mouseup:function(e){
 				button = 0;

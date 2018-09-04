@@ -1,2 +1,11 @@
-.rapBarOut{border: solid 1px #bab;position:relative;cursor:pointer;}
-.rapBarIn{z-index:1;position:absolute;height:100%;}
+.rapBarOut{
+border: solid 1px #bab;
+cursor:pointer;
+position:relative;
+}
+.rapBarIn{
+position:absolute;
+height:100%;
+box-shadow: inset -2px -2px 4px rgba(0,0,0,0.6),inset 2px 2px 4px rgba(255,255,255,0.6)};
+z-index:1;
+}

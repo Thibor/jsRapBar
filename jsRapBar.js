@@ -9,7 +9,7 @@ return this.each(function(){
 		height:'16px',
 		barColor:'green',
 		backColor:'white',
-		onClick:null,
+		onMouseUp:null,
 		onChange:null
 	},options);
 	var base = this;
@@ -21,8 +21,6 @@ return this.each(function(){
 		$(this).bind({
 			click : function(e){
 				Update(this,e);
-				if(this.opt.onClick)
-					this.opt.onClick.call(this,this.opt.position);
 			},
 			mousemove:function(e){
 				if(button)
@@ -38,23 +36,17 @@ return this.each(function(){
 			},
 			mouseup:function(e){
 				button = 0;
+				if(this.opt.onMouseUp)this.opt.onMouseUp.call(this,this.opt.position);
 			}
 		});	
 		
 	function Update(obj,e){
-		var cw = e.pageX - findRealLeft(obj);
-		var bw = $(base).width();
-		if(cw < 0)cw = 0;
-		if(cw > bw)cw = bw;
+		let cw = e.clientX - $(base)[0].getBoundingClientRect().left;
+		let bw = $(base).width();
 		inBar.width(cw);
 		base.opt.position = cw / bw;
 		if(base.opt.onChange)
 			base.opt.onChange.call(base,base.opt.position);
-	}
-	
-	function findRealLeft(obj){
-		if( !obj ) return 0;
-		return obj.offsetLeft + findRealLeft(obj.offsetParent);
 	}
 			
 	this.SetPosition = function(p){

@@ -45,13 +45,13 @@ return this.each(function(){
 		let cw = e.clientX - $(base)[0].getBoundingClientRect().left;
 		let bw = $(base).width();
 		base.SetPosition(cw / bw);
-		if(base.opt.onChange)
-			base.opt.onChange.call(base,base.opt.position);
 	}
 			
 	this.SetPosition = function(p){
 		this.opt.position = p;
 		inBar.css('width',p * 100 + '%');
+		if(this.opt.onChange)
+			this.opt.onChange.call(this,p);
 	}
 	
 	this.SetPosition(this.opt.position);	

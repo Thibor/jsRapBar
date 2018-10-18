@@ -12,19 +12,19 @@ return this.each(function(){
 		onMouseUp:null,
 		onChange:null
 	},options);
-	var base = this;
-	var button = 0;
+	let base = this;
+	let button = 0;
 	$(this).css({width:this.opt.width,height:this.opt.height,background:this.opt.backColor}).addClass('rapBarOut');
-	var inBar = $('<div>').addClass('rapBarIn').css({'background-color':this.opt.barColor,'width':this.opt.position * 100 + '%'}).appendTo($(this));
+	let inBar = $('<div>').addClass('rapBarIn').css({'background-color':this.opt.barColor}).appendTo($(this));
 	
 	if(this.opt.enabled)
 		$(this).bind({
 			click : function(e){
-				Update(this,e);
+				Update(e);
 			},
 			mousemove:function(e){
 				if(button)
-					Update(this,e)
+					Update(e)
 			},
 			mousedown:function(e){
 				button = 1;
@@ -36,15 +36,15 @@ return this.each(function(){
 			},
 			mouseup:function(e){
 				button = 0;
-				if(this.opt.onMouseUp)this.opt.onMouseUp.call(this,this.opt.position);
+				if(this.opt.onMouseUp)
+					this.opt.onMouseUp.call(this,this.opt.position);
 			}
 		});	
 		
-	function Update(obj,e){
+	function Update(e){
 		let cw = e.clientX - $(base)[0].getBoundingClientRect().left;
 		let bw = $(base).width();
-		inBar.width(cw);
-		base.opt.position = cw / bw;
+		base.SetPosition(cw / bw);
 		if(base.opt.onChange)
 			base.opt.onChange.call(base,base.opt.position);
 	}
@@ -53,7 +53,8 @@ return this.each(function(){
 		this.opt.position = p;
 		inBar.css('width',p * 100 + '%');
 	}
-			
+	
+	this.SetPosition(this.opt.position);	
 })
 
 }})(jQuery);

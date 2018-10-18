@@ -13,12 +13,19 @@ $('#demo1')[0].SetPosition(value);
 }
 
 $(document).ready(function(){
+
 $('#demo1').jsRapBar({position:0.1,
-onMouseUp:function(value){
-	alert(value);
-}
+	onMouseUp:function(value){
+		alert(value);
+	}
 });
-$('#demo2').jsRapBar({enabled:false,position:0.8,barColor:'red',width:'50%'});
+
+$('#demo2').jsRapBar({
+	enabled:false,position:0.8,
+	barColor:'red',
+	width:'50%'
+});
+
 });
 </script>
 </head>

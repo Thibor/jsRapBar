@@ -13,8 +13,7 @@
 				onChange: null
 			}, options);
 			let base = this;
-			let button = 0;
-			$(this).css({ width: this.opt.width, height: this.opt.height, background: this.opt.backColor }).addClass('rapBarOut');
+			$(this).empty().addClass('rapBarOut').css({ width: this.opt.width, height: this.opt.height, background: this.opt.backColor });
 			let inBar = $('<div>').addClass('rapBarIn').css({ 'background-color': this.opt.barColor }).appendTo($(this));
 
 			if (this.opt.enabled)
@@ -23,19 +22,10 @@
 						Update(e);
 					},
 					mousemove: function (e) {
-						if (button)
+						if (e.buttons == 1)
 							Update(e)
 					},
-					mousedown: function (e) {
-						button = 1;
-						e = e || window.event;
-						e.stopPropagation();
-						e.preventDefault();
-						if (this.setCapture)
-							this.setCapture();
-					},
 					mouseup: function (e) {
-						button = 0;
 						if (this.opt.onMouseUp)
 							this.opt.onMouseUp.call(this, this.opt.position);
 					}

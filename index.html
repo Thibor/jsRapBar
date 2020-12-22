@@ -12,18 +12,28 @@ function SetPosition(value){
 $('#demo1')[0].SetPosition(value);
 }
 
+function GetPosition(){
+let p = $('#demo1')[0].opt.position;
+alert(p);
+}
+
 $(document).ready(function(){
 
-$('#demo1').jsRapBar({position:0.1,
-	onMouseUp:function(value){
-		alert(value);
-	}
-});
+$('#demo1').jsRapBar();
 
 $('#demo2').jsRapBar({
 	enabled:false,position:0.8,
 	barColor:'red',
 	width:'50%'
+});
+
+$('#demo3').jsRapBar({
+	position:0.5,
+	barColor:'blue',
+	width:'50%',
+	onChange:function(value){
+		$('#lab3').text(value);
+	}
 });
 
 });
@@ -34,11 +44,15 @@ $('#demo2').jsRapBar({
 <div id="divGitHub">
 <div id="GitHub" onclick="location.href='https://github.com/Thibor/jsRapBar'"></div>
 </div>
-<div>Standard</div>
+<div>Demo 1 - Standard</div>
 <div id="demo1" ></div>
 <button onclick="SetPosition(0.5)">SetPosition(0.5)</button>
-<div>Disabled</div>
+<button onclick="GetPosition()">GetPosition()</button>
+<div>Demo 2 - Disabled</div>
 <div id="demo2" ></div>
+<div>Demo 3 - onChange</div>
+<div id="demo3" ></div>
+<div id="lab3" ></div>
 </div>
 </body>
 </html>

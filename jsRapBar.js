@@ -19,11 +19,11 @@
 			if (this.opt.enabled)
 				$(this).bind({
 					click: function (e) {
-						Update(e);
+						UpdatePosition(e);
 					},
 					mousemove: function (e) {
 						if (e.buttons == 1)
-							Update(e)
+							UpdatePosition(e)
 					},
 					mouseup: function (e) {
 						if (this.opt.onMouseUp)
@@ -31,19 +31,18 @@
 					}
 				});
 
-			function Update(e) {
-				let cw = e.clientX - $(base)[0].getBoundingClientRect().left;
-				let bw = $(base).width();
-				base.SetPosition(cw / bw);
+			function UpdatePosition(e) {
+				let p = (e.clientX - $(base)[0].getBoundingClientRect().left) / $(base).width();
+				base.SetPosition(p);
 			}
 
-			this.SetPosition = function (p) {
+			this.SetPosition = function(p) {
 				if (p < 0)
 					p = 0;
 				if (p > 1)
 					p = 1;
 				this.opt.position = p;
-				inBar.css('width', p * 100 + '%');
+				inBar.width( p * 100 + '%');
 				if (this.opt.onChange)
 					this.opt.onChange.call(this, p);
 			}

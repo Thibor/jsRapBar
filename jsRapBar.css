@@ -2,6 +2,7 @@
 	border: solid 1px #bab;
 	cursor: pointer;
 	position: relative;
+	user-select: none;
 }
 
 .rapBarIn {

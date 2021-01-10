@@ -9,31 +9,28 @@
 				height: '16px',
 				barColor: 'green',
 				backColor: 'white',
-				onMouseUp: null,
+				onClick: null,
 				onChange: null
 			}, options);
-			let base = this;
 			$(this).empty().addClass('rapBarOut').css({ width: this.opt.width, height: this.opt.height, background: this.opt.backColor });
 			let inBar = $('<div>').addClass('rapBarIn').css({ 'background-color': this.opt.barColor }).appendTo($(this));
 
 			if (this.opt.enabled)
 				$(this).bind({
 					click: function (e) {
-						UpdatePosition(e);
+						this.UpdatePosition(e);
+						if (this.opt.onClick)
+							this.opt.onClick.call(this, this.opt.position); 
 					},
 					mousemove: function (e) {
 						if (e.buttons == 1)
-							UpdatePosition(e)
-					},
-					mouseup: function (e) {
-						if (this.opt.onMouseUp)
-							this.opt.onMouseUp.call(this, this.opt.position);
+							this.UpdatePosition(e);
 					}
 				});
 
-			function UpdatePosition(e) {
-				let p = (e.clientX - $(base)[0].getBoundingClientRect().left) / $(base).width();
-				base.SetPosition(p);
+			this.UpdatePosition = function(e) {
+				let p = (e.clientX - this.getBoundingClientRect().left) / $(this).width();
+				this.SetPosition(p);
 			}
 
 			this.SetPosition = function(p) {
